@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
         case ADD_FORM: {
             return {
                 ...state,
-                list: state.list.concat(action.payload)
+                list: action.payload
             };
         }
         default: {

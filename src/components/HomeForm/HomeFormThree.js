@@ -8,20 +8,24 @@ import {TOGGLE} from '../../store/constants';
 const HomeFormThree = ({addForm}) => {
     const ui = useSelector(state => state.ui);
     console.log(ui);
+    const defaultValues = {
+        'test': ui.list
+    }
     const dispatch = useDispatch();
     const {
         control,
         register,
         handleSubmit,
         errors
-    } = useForm();
+    } = useForm({defaultValues});
     const { fields, append, remove } = useFieldArray({
         control,
         name: "test"
     });
 
     const onSubmit = (data) => {
-        addForm(data.test);
+        const formData = data.test.map((d,i) => { return {...d,id:i}} );
+        addForm(formData);
     }
 
     return (
@@ -34,14 +38,16 @@ const HomeFormThree = ({addForm}) => {
                         <li key={item.id}>
                             <div>
                                 <input
-                                    name={`test[${index}].name`}
+                                    name={`test[${index}].username`}
+                                    defaultValue={item.username}
                                     ref={register({ required: "Required" })}
                                 />
-                                {errors.test && errors.test[index] && errors.test[index].name && errors.test[index].name.message}
+                                {errors.test && errors.test[index] && errors.test[index].username && errors.test[index].username.message}
                             </div>
                             <div>
                                 <input
                                     name={`test[${index}].email`}
+                                    defaultValue={item.email}
                                     ref={register({ required: "Required" })}
                                 />
                                 {errors.test && errors.test[index] && errors.test[index].email && errors.test[index].email.message}
