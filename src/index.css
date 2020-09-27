@@ -29,6 +29,10 @@ ol, ul {
   min-width: 90px;
 }
 
+.btn + .btn {
+  margin-left: 10px;
+}
+
 .form-control {
   font-size: 1.2rem;
 }

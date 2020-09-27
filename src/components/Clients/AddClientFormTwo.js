@@ -3,82 +3,87 @@ import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from 'react-router-dom';
 
-import { ADD_CLIENT_FORM_ONE } from '../../store/constants';
+import { ADD_CLIENT_FORM_TWO } from '../../store/constants';
 
-function AddClientFormOne(props) {
+function AddClientFormTwo(props) {
     const addClient = useSelector(state => state.addClient);
-    const defaultValues = addClient.formOne;
+    const defaultValues = addClient.formTwo;
     const { handleSubmit, register, errors } = useForm({ defaultValues });
     const dispatch = useDispatch();
     const onSubmit = form => {
         console.log(form);
         dispatch({
-            type: ADD_CLIENT_FORM_ONE,
+            type: ADD_CLIENT_FORM_TWO,
             payload: form
         })
-        props.history.push('/client/add/form-two');
+        props.history.push('/client/add/form-one');
+    }
+    const onBack = () => {
+        props.history.push('/client/add/form-one');
     }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <h4>Client details</h4>
+            <h4>Client PoC details</h4>
             <div>
                 <div>
-                    <label>clientName</label>
+                    <label>pocName</label>
                     <input
-                        name="clientName"
+                        name="pocName"
                         ref={register({ required: "Required" })}
                     />
-                    {errors.clientName && errors.clientName.message}
+                    {errors.pocName && errors.pocName.message}
                 </div>
                 <div>
-                    <label>clientId</label>
+                    <label>designation</label>
                     <input
-                        name="clientId"
+                        name="designation"
                         ref={register({ required: "Required" })}
                     />
-                    {errors.clientId && errors.clientId.message}
+                    {errors.designation && errors.designation.message}
                 </div>
                 <div>
-                    <label>industry</label>
+                    <label>emailId</label>
                     <input
-                        name="industry"
+                        name="emailId"
                         ref={register({ required: "Required" })}
                     />
-                    {errors.industry && errors.industry.message}
+                    {errors.emailId && errors.emailId.message}
                 </div>
             </div>
 
-            <h4>Client bank account details</h4>
+            <h4>Darwinbox owner</h4>
             <div>
                 <div>
-                    <label>accountNumber</label>
+                    <label>sales</label>
                     <input
-                        name="accountNumber"
+                        name="sales"
                         ref={register({ required: "Required" })}
                     />
-                    {errors.accountNumber && errors.accountNumber.message}
+                    {errors.sales && errors.sales.message}
                 </div>
                 <div>
-                    <label>ifscCode</label>
+                    <label>manager</label>
                     <input
-                        name="ifscCode"
+                        name="manager"
                         ref={register({ required: "Required" })}
                     />
-                    {errors.ifscCode && errors.ifscCode.message}
+                    {errors.manager && errors.manager.message}
                 </div>
                 <div>
-                    <label>bankName</label>
+                    <label>associate</label>
                     <input
-                        name="bankName"
+                        name="associate"
                         ref={register({ required: "Required" })}
                     />
-                    {errors.bankName && errors.bankName.message}
+                    {errors.associate && errors.associate.message}
                 </div>
             </div>
+
             <input className="btn btn-primary" type="submit" />
+            <input className="btn btn-secondary" type="button" value="Back" onClick={onBack} />
         </form>
     )
 }
 
-export default withRouter(AddClientFormOne)
+export default withRouter(AddClientFormTwo)

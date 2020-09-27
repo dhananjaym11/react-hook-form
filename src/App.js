@@ -12,18 +12,18 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-      <div className="App">
-        <BrowserRouter>
-          <Layout>
-            <Switch>
-              <Route exact path="/" component={HomeContainer} />
-              <Route exact path="/clients" component={ClientsContainer} />
-              <Route exact path="/client/add" component={ClientContainer} />
-            </Switch>
-          </Layout>
-        </BrowserRouter>
-      </div>
-    </Provider>
+        <div className="App">
+          <BrowserRouter>
+            <Layout>
+              <Switch>
+                <Route exact path="/" component={HomeContainer} />
+                <Route exact path="/clients" component={ClientsContainer} />
+                <Route path="/client/add" component={ClientContainer} />
+              </Switch>
+            </Layout>
+          </BrowserRouter>
+        </div>
+      </Provider>
     );
   }
 }
