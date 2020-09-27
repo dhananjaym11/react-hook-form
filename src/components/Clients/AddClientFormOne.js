@@ -76,7 +76,7 @@ function AddClientFormOne(props) {
                     {errors.bankName && errors.bankName.message}
                 </div>
             </div>
-            <input className="btn btn-primary" type="submit" />
+            <input className="btn btn-primary" type="submit" value="Next" />
         </form>
     )
 }

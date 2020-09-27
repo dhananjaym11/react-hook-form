@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
-const ClientsContainer = function () {
-    const clients = [
-        'Paytm', 'Myntra', 'Karvy'
-    ]
+import ClientList from '../../components/Clients/ClientList';
+
+export default function ClientsContainer() {
+    const clients = useSelector(state => state.clients);
     return (
         <div>
             <h2>Clients profile</h2>
@@ -14,18 +15,10 @@ const ClientsContainer = function () {
             <div>
                 <ul>
                     {clients.map(client => (
-                        <li className="clearfix" key={client}>
-                            {client}
-                            <div className="float-right">
-                                <span className="btn btn-link">Edit</span>
-                                <span className="btn btn-link">Delete</span>
-                            </div>
-                        </li>
+                        <ClientList key={client.name} {...client} />
                     ))}
                 </ul>
             </div>
         </div>
     )
 }
-
-export default ClientsContainer;

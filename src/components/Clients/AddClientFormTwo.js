@@ -18,7 +18,7 @@ function AddClientFormTwo(props) {
         })
         props.history.push('/client/add/form-one');
     }
-    const onBack = () => {
+    const onBackClick = () => {
         props.history.push('/client/add/form-one');
     }
 
@@ -81,7 +81,7 @@ function AddClientFormTwo(props) {
             </div>
 
             <input className="btn btn-primary" type="submit" />
-            <input className="btn btn-secondary" type="button" value="Back" onClick={onBack} />
+            <input className="btn btn-secondary" type="button" value="Back" onClick={onBackClick} />
         </form>
     )
 }
