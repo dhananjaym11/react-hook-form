@@ -1,3 +1,5 @@
+import { ADD_CLIENT, UPDATE_CLIENT } from "../constants";
+
 const initialState = [
     {
         name: 'Paytm',
@@ -60,6 +62,18 @@ const initialState = [
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case ADD_CLIENT: {
+            return [
+                ...state,
+                action.payload.client
+            ];
+        }
+        case UPDATE_CLIENT: {
+            const updatedClient = state.map((client, index) => index === action.payload.id ? action.payload.client : client);
+            return [
+                ...updatedClient
+            ];
+        }
         default: {
             return [...state];
         }

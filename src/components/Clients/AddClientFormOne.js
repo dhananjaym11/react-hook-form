@@ -11,12 +11,16 @@ function AddClientFormOne(props) {
     const { handleSubmit, register, errors } = useForm({ defaultValues });
     const dispatch = useDispatch();
     const onSubmit = form => {
-        console.log(form);
         dispatch({
             type: ADD_CLIENT_FORM_ONE,
             payload: form
         })
-        props.history.push('/client/add/form-two');
+        const id = props.match.params.clientId;
+        if (id) {
+            props.history.push('/client/edit/' + id + '/form-two');
+        } else {
+            props.history.push('/client/add/form-two');
+        }
     }
 
     return (

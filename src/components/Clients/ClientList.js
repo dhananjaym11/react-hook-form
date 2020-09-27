@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function ClientList(props) {
+export default function ClientList({ id, name }) {
     return (
-        <li className="clearfix" key={props.name}>
-            {props.name}
+        <li className="clearfix">
+            {name}
             <div className="float-right">
-                <span className="btn btn-link">Edit</span>
+                <Link to={`/client/edit/${id}`} className="btn btn-link">Edit</Link>
                 <span className="btn btn-link">Delete</span>
             </div>
         </li>

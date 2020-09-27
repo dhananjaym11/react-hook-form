@@ -14,8 +14,8 @@ export default function ClientsContainer() {
             </div>
             <div>
                 <ul>
-                    {clients.map(client => (
-                        <ClientList key={client.name} {...client} />
+                    {clients.map((client, index) => (
+                        <ClientList key={client.name} id={index} name={client.name} />
                     ))}
                 </ul>
             </div>

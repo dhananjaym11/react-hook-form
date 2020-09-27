@@ -3,23 +3,41 @@ import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from 'react-router-dom';
 
-import { ADD_CLIENT_FORM_TWO } from '../../store/constants';
+import { ADD_CLIENT, UPDATE_CLIENT } from '../../store/constants';
 
 function AddClientFormTwo(props) {
     const addClient = useSelector(state => state.addClient);
     const defaultValues = addClient.formTwo;
     const { handleSubmit, register, errors } = useForm({ defaultValues });
     const dispatch = useDispatch();
+    const id = +props.match.params.clientId;
+
     const onSubmit = form => {
-        console.log(form);
-        dispatch({
-            type: ADD_CLIENT_FORM_TWO,
-            payload: form
-        })
-        props.history.push('/client/add/form-one');
+        const { formOne } = addClient;
+        const client = {
+            name: formOne.clientName,
+            formOne,
+            formTwo: form
+        }
+        if (id) {
+            dispatch({
+                type: UPDATE_CLIENT,
+                payload: { id, client }
+            })
+        } else {
+            dispatch({
+                type: ADD_CLIENT,
+                payload: { client }
+            })
+        }
+        props.history.push('/clients');
     }
     const onBackClick = () => {
-        props.history.push('/client/add/form-one');
+        if (id) {
+            props.history.push('/client/edit/' + id + '/form-one');
+        } else {
+            props.history.push('/client/add/form-one');
+        }
     }
 
     return (

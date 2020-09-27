@@ -19,6 +19,7 @@ class App extends React.Component {
                 <Route exact path="/" component={HomeContainer} />
                 <Route exact path="/clients" component={ClientsContainer} />
                 <Route path="/client/add" component={ClientContainer} />
+                <Route path="/client/edit/:clientId" component={ClientContainer} />
               </Switch>
             </Layout>
           </BrowserRouter>

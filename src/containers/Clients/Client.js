@@ -1,22 +1,34 @@
-import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
 
-import AddClientFormOne from '../../components/Clients/AddClientFormOne';
-import AddClientFormTwo from '../../components/Clients/AddClientFormTwo';
+import { ADD_CLIENT_FORM_ALL } from '../../store/constants';
+import AddClient from '../../components/Clients/AddClient';
+import EditClient from '../../components/Clients/EditClient';
 
-const ClientContainer = function () {
+export default function ClientContainer(props) {
+    const clients = useSelector(state => state.clients);
+    const dispatch = useDispatch();
+    const id = props.match.params.clientId;
+
+    useEffect(() => {
+        if (id) {
+            const { formOne, formTwo } = clients[id];
+            dispatch({
+                type: ADD_CLIENT_FORM_ALL,
+                payload: { formOne, formTwo }
+            })
+        } else {
+            dispatch({
+                type: ADD_CLIENT_FORM_ALL,
+                payload: { formOne: {}, formTwo: {} }
+            })
+        }
+    }, []);
+
     return (
         <div>
             <h2>Clients profile</h2>
-            <div>
-                <Switch>
-                    <Redirect exact from="/client/add/" to="/client/add/form-one" />
-                    <Route exact path="/client/add/form-one" component={AddClientFormOne} />
-                    <Route exact path="/client/add/form-two" component={AddClientFormTwo} />
-                </Switch>
-            </div>
+            { id ? <EditClient /> : <AddClient />}
         </div>
     )
 }
-
-export default ClientContainer;
