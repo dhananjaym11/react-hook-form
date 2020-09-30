@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from 'react-router-dom';
 
-import { ADD_CLIENT, UPDATE_CLIENT } from '../../store/constants';
+import { UPDATE_CLIENTS } from '../../store/constants';
 
 function AddClientFormTwo(props) {
     const addClient = useSelector(state => state.addClient);
+    const clients = useSelector(state => state.clients);
     const defaultValues = addClient.formTwo;
     const { handleSubmit, register, errors } = useForm({ defaultValues });
     const dispatch = useDispatch();
@@ -19,17 +20,19 @@ function AddClientFormTwo(props) {
             formOne,
             formTwo: form
         }
-        if (id) {
-            dispatch({
-                type: UPDATE_CLIENT,
-                payload: { id, client }
-            })
+        let updatedClients;
+        if (isNaN(id)) {
+            updatedClients = [
+                ...clients,
+                client
+            ]
         } else {
-            dispatch({
-                type: ADD_CLIENT,
-                payload: { client }
-            })
+            updatedClients = clients.map((c, index) => index === id ? client : c);
         }
+        dispatch({
+            type: UPDATE_CLIENTS,
+            payload: updatedClients
+        })
         props.history.push('/clients');
     }
     const onBackClick = () => {

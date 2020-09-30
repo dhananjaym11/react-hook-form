@@ -1,4 +1,4 @@
-import { ADD_CLIENT, UPDATE_CLIENT } from "../constants";
+import { ADD_CLIENT, UPDATE_CLIENTS } from "../constants";
 
 const initialState = [
     {
@@ -68,11 +68,8 @@ export default (state = initialState, action) => {
                 action.payload.client
             ];
         }
-        case UPDATE_CLIENT: {
-            const updatedClient = state.map((client, index) => index === action.payload.id ? action.payload.client : client);
-            return [
-                ...updatedClient
-            ];
+        case UPDATE_CLIENTS: {
+            return [...action.payload];
         }
         default: {
             return [...state];
